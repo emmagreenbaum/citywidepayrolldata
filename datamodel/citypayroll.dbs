@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="citywidepayrolldata" id="LogicalDesign-26df" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="citywidepayrolldata" >
+		<table name="Employees_Dimension" prior="Entity" >
+			<column name="PayrollNumber" type="BIGINT" jt="-5" />
+			<column name="LastName" type="VARCHAR" length="100" jt="12" />
+			<column name="FirstName" type="VARCHAR" length="100" jt="12" />
+			<column name="MidInit" type="BIGINT" jt="-5" />
+			<column name="AgencyName" type="VARCHAR" length="100" jt="12" />
+			<column name="AgencyStartDate" type="DATE" jt="91" />
+			<column name="WorkLocationBorough" type="BIGINT" jt="-5" />
+			<column name="TitleDescription" type="BIGINT" jt="-5" />
+			<index name="pk_LastName" unique="UNIQUE_KEY" >
+				<column name="LastName" />
+			</index>
+			<index name="pk_FirstName" unique="UNIQUE_KEY" >
+				<column name="FirstName" />
+			</index>
+			<index name="pk_MidInit" unique="UNIQUE_KEY" >
+				<column name="MidInit" />
+			</index>
+			<index name="pk_AgencyStartDate" unique="UNIQUE_KEY" >
+				<column name="AgencyStartDate" />
+			</index>
+			<index name="pk_WorkLocationBorough" unique="UNIQUE_KEY" >
+				<column name="WorkLocationBorough" />
+			</index>
+			<index name="pk_TitleDescription" unique="UNIQUE_KEY" >
+				<column name="TitleDescription" />
+			</index>
+			<index name="pk_PayrollNumber" unique="UNIQUE_KEY" >
+				<column name="PayrollNumber" />
+			</index>
+			<index name="pk_AgencyStartDate_001" unique="UNIQUE_KEY" >
+				<column name="AgencyStartDate" />
+			</index>
+		</table>
+		<table name="Fact_Table" prior="Entity" >
+			<column name="FiscalYear" type="CHAR" length="100" jt="1" mandatory="y" />
+			<column name="PayrollNumber" type="CHAR" length="100" jt="1" mandatory="y" />
+			<column name="AgencyName" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="LastName" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="FirstName" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="MidInit" type="INT" jt="4" mandatory="y" />
+			<column name="AgencyStartDate" type="DATE" jt="91" mandatory="y" />
+			<column name="WorkLocationBorough" type="CHAR" length="100" jt="1" mandatory="y" />
+			<column name="TitleDescription" type="CHAR" length="100" jt="1" mandatory="y" />
+			<column name="LeaveStatus" type="CHAR" length="100" jt="1" mandatory="y" />
+			<column name="BaseSalary" type="BIGINT" jt="-5" />
+			<column name="PayBasis" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="RegHours" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="RegGrossPaid" type="BIGINT" jt="-5" mandatory="y" />
+			<column name="OTHours" type="BIGINT" jt="-5" />
+			<column name="TotalOTPaid" type="INT" jt="4" />
+			<column name="TotalOtherPay" type="INT" jt="4" />
+			<index name="pk" unique="PRIMARY_KEY" >
+				<column name="LastName" />
+				<column name="FirstName" />
+				<column name="MidInit" />
+				<column name="AgencyStartDate" />
+				<column name="WorkLocationBorough" />
+				<column name="TitleDescription" />
+				<column name="FiscalYear" />
+				<column name="PayrollNumber" />
+				<column name="AgencyName" />
+				<column name="LeaveStatus" />
+				<column name="PayBasis" />
+				<column name="RegHours" />
+				<column name="RegGrossPaid" />
+			</index>
+			<fk name="fk_Fact_Table_Employees_Dimension" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="LastName" pk="LastName" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_0" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="FirstName" pk="FirstName" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_1" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="MidInit" pk="MidInit" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_2" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="AgencyStartDate" pk="AgencyStartDate" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_3" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="WorkLocationBorough" pk="WorkLocationBorough" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_4" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="TitleDescription" pk="TitleDescription" />
+			</fk>
+			<fk name="fk_Fact_Table_Time_Dimension" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Time_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="FiscalYear" pk="Fact_FiscalYear" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_5" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="PayrollNumber" pk="PayrollNumber" />
+			</fk>
+			<fk name="fk_Fact_Table_Employees_Dimension_6" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Employees_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="AgencyName" pk="AgencyStartDate" />
+			</fk>
+			<fk name="fk_Fact_Table_LeaveStatus_Dimension" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="LeaveStatus_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="LeaveStatus" pk="LeaveStatus" />
+			</fk>
+			<fk name="fk_Fact_Table_PayBasis_Dimension" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="PayBasis_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="PayBasis" pk="PayBasis" />
+			</fk>
+			<fk name="fk_Fact_Table_Location_Dimension" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="Location_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="WorkLocationBorough" pk="WorkLocationBorough" />
+			</fk>
+			<fk name="fk_Fact_Table_PayBasis_Dimension_0" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="PayBasis_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="RegHours" pk="PayBasis" />
+			</fk>
+			<fk name="fk_Fact_Table_PayBasis_Dimension_1" virtual="y" to_schema="citywidepayrolldata.INSTANCE" to_table="PayBasis_Dimension" type="Identifying" mandatory="y" cardinality="OneMore" range_from="0" range_to="0" >
+				<fk_column name="RegGrossPaid" pk="PayBasis" />
+			</fk>
+		</table>
+		<table name="LeaveStatus_Dimension" prior="Entity" >
+			<column name="LeaveStatus" type="CHAR" length="1" jt="1" />
+			<index name="pk_LeaveStatus" unique="UNIQUE_KEY" >
+				<column name="LeaveStatus" />
+			</index>
+		</table>
+		<table name="Location_Dimension" prior="Entity" >
+			<column name="WorkLocationBorough" type="CHAR" length="100" jt="1" />
+			<index name="pk_WorkLocationBorough" unique="UNIQUE_KEY" >
+				<column name="WorkLocationBorough" />
+			</index>
+		</table>
+		<table name="PayBasis_Dimension" prior="Entity" >
+			<column name="PayBasis" type="BIGINT" jt="-5" />
+			<index name="pk_PayBasis" unique="UNIQUE_KEY" >
+				<column name="PayBasis" />
+			</index>
+			<index name="pk_PayBasis_001" unique="UNIQUE_KEY" >
+				<column name="PayBasis" />
+			</index>
+			<index name="pk_PayBasis_002" unique="UNIQUE_KEY" >
+				<column name="PayBasis" />
+			</index>
+		</table>
+		<table name="Time_Dimension" prior="Entity" >
+			<column name="Fact_FiscalYear" type="BIGINT" jt="-5" mandatory="y" />
+			<index name="pk_Time_Dimension" unique="PRIMARY_KEY" >
+				<column name="Fact_FiscalYear" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-755" show_relation="columns" >
+		<entity schema="citywidepayrolldata.INSTANCE" name="Employees_Dimension" color="C1D8EE" x="102" y="221" />
+		<entity schema="citywidepayrolldata.INSTANCE" name="Fact_Table" color="C1D8EE" x="391" y="221" />
+		<entity schema="citywidepayrolldata.INSTANCE" name="LeaveStatus_Dimension" color="C1D8EE" x="561" y="612" />
+		<entity schema="citywidepayrolldata.INSTANCE" name="Location_Dimension" color="C1D8EE" x="119" y="612" />
+		<entity schema="citywidepayrolldata.INSTANCE" name="PayBasis_Dimension" color="C1D8EE" x="646" y="442" />
+		<entity schema="citywidepayrolldata.INSTANCE" name="Time_Dimension" color="C1D8EE" x="629" y="204" />
+		<callout x="51" y="51" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+	</layout>
+</project>
