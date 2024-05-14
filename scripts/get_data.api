@@ -1,0 +1,25 @@
+from flask import Flask, jsonify
+import requests
+
+# Create a Flask application
+app = Flask(__name__)
+
+# OData API endpoint URL
+odata_url = 'https://data.cityofnewyork.us/api/odata/v4/k397-673e'
+
+# Create a route to fetch data from the OData API
+@app.route('/api/payroll', methods=['GET'])
+def get_payroll_data():
+    # Make an HTTP request to the OData API endpoint
+    response = requests.get(odata_url)
+    
+    if response.status_code == 200:
+       
+        data = response.json()
+        
+        return jsonify(data)
+    else:
+        return jsonify({'error': 'Failed to fetch data from the OData API'}), response.status_code
+
+if __name__ == '__main__':
+    app.run(debug=True)
